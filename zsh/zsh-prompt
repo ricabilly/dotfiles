@@ -1,0 +1,20 @@
+# Load colors so we can access $fg and more.
+autoload -U colors && colors
+
+# Get git info
+autoload -Uz vcs_info # enable vcs_info
+precmd () { vcs_info } # always load before displaying the prompt
+
+zstyle ':vcs_info:*' formats '( %b)' # (main)
+
+# Print empty line after command
+precmd() {
+    precmd() {
+        echo
+    }
+}
+
+# Style the prompt
+setopt PROMPT_SUBST
+PS1='%{$fg[blue]%}%n %{$fg[green]%}%d/ $vcs_info_msg_0_%{$reset_color%}
+%(?.%(!.#.).%{$fg[red]%}%(!.#.)) %{$reset_color%}'

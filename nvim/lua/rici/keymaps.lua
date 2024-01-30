@@ -38,8 +38,10 @@ keymap("n", "<S-h>", "<cmd>bprevious<CR>", opts)
 keymap("n", "<A-j>", "<cmd>m .+1<CR>==", opts)
 keymap("n", "<A-k>", "<cmd>m .-2<CR>==", opts)
 
-keymap("n", "<leader><C-m>", "<cmd>%s/\\r//g<CR>")
+-- Remove \r after paste from Windows
+keymap("n", "<leader><C-m>", "<cmd>%s/\\r//g<CR>", { desc = "Clear ^M"})
 
+-- Easy copy paste to clipboard
 keymap({"n", "v"}, "<leader>y", [["+y]])
 keymap("n", "<leader>Y", [["+Y]])
 
@@ -52,6 +54,8 @@ keymap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 keymap("n", "<CR>", "o<ESC>")
+
+keymap("n", "<leader>gf", "yiW:e <C-r>0<CR>", { desc = "Goto file under cursor"})
 
 -- Insert --
 -- Press jk fast to exit insert mode 
@@ -68,6 +72,9 @@ keymap("v", "p", '"_dP', opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+keymap("v", "<leader>gf", "y:e <C-r>0<CR>", { desc = "Goto highlighted file"})
+
 
 -- Visual Block --
 keymap("x", "<A-j>", "<cmd>m '>+1<CR>gv=gv", opts)
